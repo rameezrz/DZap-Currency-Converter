@@ -4,3 +4,4 @@ import { CurrencyController } from '../controllers/CurrencyController';
 export const router = Router();
 
 router.get('/currencies', CurrencyController.getCurrencies);
+router.get('/convert-currency', CurrencyController.convertCurrency)

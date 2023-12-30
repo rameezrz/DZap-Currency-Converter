@@ -11,3 +11,8 @@ export type CryptoCurrency = BaseCurrency &{
 export type FiatCurrency = BaseCurrency & {
   sign: string;
 };
+
+export type CombinedCurrenciesResponse = {
+  cryptocurrencies: CryptoCurrency[];
+  fiatCurrencies: FiatCurrency[];
+};
