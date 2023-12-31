@@ -51,9 +51,9 @@ const ConverterForm = () => {
               label="From"
               amount={amount}
               currencyOptions={crypto}
-              onCurrencyChange={(currency) => setFromCurrency(currency)}
               onAmountChange={(amount) => setAmount(amount)}
               selectedCurrency={fromCurrency}
+              type="source"
             />
           </div>
           <div className="relative w-full h-0.5">
@@ -69,15 +69,15 @@ const ConverterForm = () => {
               label="To"
               amount={convertedAmount}
               currencyOptions={crypto}
-              onCurrencyChange={(currency) => setToCurrency(currency)}
               selectedCurrency={toCurrency}
               amountDisabled
+              type="target"
             />
           </div>
           <button
             type="submit"
             onClick={convert}
-            className="w-full bg-[#44b496] text-[#000238] font-bold text-lg px-4 py-3 rounded-lg"
+            className="w-full bg-[#44b496] text-[#000238] font-bold text-lg px-4 py-3 rounded-lg transition-all hover:text-gray-300 hover:bg-[#0b2821] "
           >
             Convert {fromCurrency.toUpperCase()} to {toCurrency.toUpperCase()}
           </button>

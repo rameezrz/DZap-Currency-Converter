@@ -6,11 +6,13 @@ import CurrencyContext from "../context/CurrencyContext";
 import { CryptoCurrency, FiatCurrency } from "../types/CurrencyType";
 
 type DropDownProps = {
-  type: 'source' | 'target';
+  type: "source" | "target";
 };
 
-const DropDown = ({ type = 'target' }: DropDownProps) => {
-  const [cryptocurrencies, setCryptoCurrencies] = useState<CryptoCurrency[]>([]);
+const DropDown = ({ type }: DropDownProps) => {
+  const [cryptocurrencies, setCryptoCurrencies] = useState<CryptoCurrency[]>(
+    []
+  );
   const [fiatcurrencies, setFiatCurrencies] = useState<FiatCurrency[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedCurrency, setSelectedCurrency] = useState("");
@@ -22,37 +24,41 @@ const DropDown = ({ type = 'target' }: DropDownProps) => {
     setFiatCurrencies(fiatcurrencies);
   }, []);
 
-  const handleSelect = (currency: string) => {
-    setSelectedCurrency(currency);
-  };
-
   const currencyContext = useContext(CurrencyContext);
 
-  useEffect(() => {
-    // This useEffect will be triggered whenever selectedCurrency changes
-    if (currencyContext) {
-      // Check the type prop to determine whether to update source or target currency
-      if (type === 'source') {
-        currencyContext.setSourceCurrency(selectedCurrency);
-      } else if (type === 'target') {
-        currencyContext.setTargetCurrency(selectedCurrency);
-      }
-    }
-  }, [selectedCurrency, type, currencyContext]);
-
   const handleClose = () => {
-    // Update the isListOpen state in the global context
     if (currencyContext) {
       currencyContext.setIsListOpen(false);
     }
   };
 
-  // Conditionally render the component based on the value of isListOpen
-  return currencyContext?.isListOpen ? (
+  const handleSelect = (currency: string) => {
+    setSelectedCurrency((prev)=>currency);
+    handleClose();
+  };
+
+  useEffect(() => {
+    if (currencyContext) {
+      if (type === "source") {
+        currencyContext.setSourceCurrency(selectedCurrency);
+      } else if (type === "target") {
+        currencyContext.setTargetCurrency(selectedCurrency);
+      }
+    }
+  }, [selectedCurrency, type, currencyContext]);
+
+  useEffect(()=>{
+    if(currencyContext){
+      console.log(currencyContext.sourceCurrency, 'source-----------');
+      
+    }
+  })
+
+  return (
     <div className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center">
       <div className="w-[30rem] h-[40rem] bg-gray-50 rounded-2xl py-5 px-8">
         <div className="font-bold mb-5 flex justify-between">
-          <p>Convert from</p>
+          <p>Convert {type === "source" ? "from" : "to"}</p>
           <button className="text-gray-500 text-2xl" onClick={handleClose}>
             <IoCloseOutline />
           </button>
@@ -76,7 +82,9 @@ const DropDown = ({ type = 'target' }: DropDownProps) => {
               <li
                 key={fiat.id}
                 className={`hover:bg-gray-100 px-3 py-2 flex cursor-pointer ${
-                  fiat?.name?.toLowerCase().startsWith(searchValue) ? "block" : "hidden"
+                  fiat?.name?.toLowerCase().startsWith(searchValue)
+                    ? "block"
+                    : "hidden"
                 }`}
                 onClick={() => handleSelect(fiat.symbol)}
               >
@@ -99,7 +107,9 @@ const DropDown = ({ type = 'target' }: DropDownProps) => {
               <li
                 key={crypto.id}
                 className={`hover:bg-gray-100 px-3 py-2 flex cursor-pointer ${
-                  crypto?.name?.toLowerCase().startsWith(searchValue) ? "block" : "hidden"
+                  crypto?.name?.toLowerCase().startsWith(searchValue)
+                    ? "block"
+                    : "hidden"
                 }`}
                 onClick={() => handleSelect(crypto.symbol)}
               >
@@ -120,8 +130,7 @@ const DropDown = ({ type = 'target' }: DropDownProps) => {
         </div>
       </div>
     </div>
-  ) : null;
+  );
 };
 
 export default DropDown;
-

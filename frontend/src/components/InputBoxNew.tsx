@@ -25,7 +25,7 @@
 //           className="outline-none w-full bg-transparent py-1.5"
 //           placeholder="0"
 //           disabled={amountDisabled}
-//           value={amount === null ? '' : amount.toString()} 
+//           value={amount === null ? '' : amount.toString()}
 //           onChange={(e) => {
 //             const newValue = e.target.value;
 //             const newAmount = newValue === '' ? null : Number(newValue); // Use null for empty value
@@ -54,24 +54,25 @@
 
 // export default InputBox;
 
-import React,{useState} from "react";
+import React, { useContext, useState } from "react";
 import { useId } from "react";
 import InputBoxProps from "../types/InputBoxProps";
-import {BiChevronDown} from "react-icons/bi"
+import { BiChevronDown } from "react-icons/bi";
+import CurrencyContext from "../context/CurrencyContext";
 
 const InputBox: React.FC<InputBoxProps> = ({
   label,
   amount,
+  type,
   onAmountChange,
-  onCurrencyChange,
-  currencyOptions = [],
   selectedCurrency = "USD",
   amountDisabled = false,
-  currencyDisabled = false,
   className = "",
 }) => {
   const id = useId();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const currencyContext = useContext(CurrencyContext);
 
   return (
     <div className={`bg-white p-3 rounded-lg text-sm flex ${className}`}>
@@ -81,17 +82,28 @@ const InputBox: React.FC<InputBoxProps> = ({
         </label>
         <input
           id={id}
-          type="number"
-          className="outline-none w-full bg-transparent py-1.5"
+          type="text"
+          className="text-2xl text-slate-700 outline-none w-full bg-transparent py-1.5"
           placeholder="0"
           disabled={amountDisabled}
-          value={amount === null ? "" : amount.toString()}
+          value={
+            amount === null
+              ? ""
+              : amount.toLocaleString(undefined, {
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 10,
+                })
+          }
           onChange={(e) => {
             const newValue = e.target.value;
-            const newAmount =
-              newValue === "" ? null : Number(newValue); // Use null for empty value
-            onAmountChange &&
-              onAmountChange(newAmount !== null ? newAmount : 0); // Provide a default value if newAmount is null
+            // Allow only numeric and decimal characters
+            const sanitizedValue = newValue.replace(/[^0-9.]/g, "");
+
+            // Convert to a floating-point number
+            const numberValue = parseFloat(sanitizedValue) || 0;
+
+            // Update state
+            onAmountChange && onAmountChange(numberValue);
           }}
         />
       </div>
@@ -99,13 +111,25 @@ const InputBox: React.FC<InputBoxProps> = ({
         <p className="text-black/40 mb-2 w-full">Currency Type</p>
         <div className="custom-dropdown-container bg-gray-200 px-2 py-1 rounded-lg">
           <button
-            className="custom-dropdown-toggle flex items-center gap-1"
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="custom-dropdown-toggle flex justify-center items-center gap-2 py-2"
+            onClick={() => {
+              setIsDropdownOpen(!isDropdownOpen);
+              if (!isDropdownOpen) {
+                if (currencyContext) {
+                  currencyContext.setIsListOpen(true);
+                  currencyContext.setDropdownType(type);
+                }
+              }
+            }}
           >
+            <img
+              src={`https://s2.coinmarketcap.com/static/img/coins/64x64/1.png`}
+              className="w-6"
+              alt=""
+            />
             {selectedCurrency.toUpperCase()}
-            <BiChevronDown size={18}/>
+            <BiChevronDown size={18} />
           </button>
-          
         </div>
       </div>
     </div>
@@ -113,4 +137,3 @@ const InputBox: React.FC<InputBoxProps> = ({
 };
 
 export default InputBox;
-

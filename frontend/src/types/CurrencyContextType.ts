@@ -1,12 +1,16 @@
 import { Dispatch, SetStateAction } from "react";
 
+export type DropdownType = "source" | "target";
+
 type CurrencyContextType = {
-  sourceCurrency: string; // Adjust the type accordingly
-  setSourceCurrency: Dispatch<SetStateAction<string>>; // Adjust the type accordingly
-  targetCurrency: string; // Adjust the type accordingly
-  setTargetCurrency: Dispatch<SetStateAction<string>>; // Adjust the type accordingly
+  sourceCurrency: string;
+  setSourceCurrency: Dispatch<SetStateAction<string>>;
+  targetCurrency: string;
+  setTargetCurrency: Dispatch<SetStateAction<string>>;
   isListOpen: boolean;
   setIsListOpen: Dispatch<SetStateAction<boolean>>;
+  dropdownType: DropdownType;
+  setDropdownType: Dispatch<SetStateAction<DropdownType>>;
 };
 
-export default CurrencyContextType
+export default CurrencyContextType;

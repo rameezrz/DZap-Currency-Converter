@@ -1,6 +1,7 @@
 type InputBoxProps = {
   label: string;
   amount: number;
+  type: "source" | "target";
   onAmountChange?: (amount: number) => void;
   onCurrencyChange?: (currency: string) => void;
   currencyOptions?: CryptoCurrency[];
@@ -16,7 +17,7 @@ type BaseCurrency = {
   name: string;
 };
 
-export type CryptoCurrency = BaseCurrency &{
+export type CryptoCurrency = BaseCurrency & {
   slug: string;
 };
 
@@ -28,7 +29,5 @@ export type CombinedCurrenciesResponse = {
   cryptocurrencies: CryptoCurrency[];
   fiatCurrencies: FiatCurrency[];
 };
-
-
 
 export default InputBoxProps;

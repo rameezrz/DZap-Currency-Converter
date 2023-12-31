@@ -1,6 +1,7 @@
 import { ReactNode, useState } from "react";
 import CurrencyContext from "./CurrencyContext";
-import CurrencyContextType from "../types/CurrencyContextType";
+import CurrencyContextType,{DropdownType} from "../types/CurrencyContextType";
+
 
 const CurrencyContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -8,6 +9,7 @@ const CurrencyContextProvider: React.FC<{ children: ReactNode }> = ({
   const [sourceCurrency, setSourceCurrency] = useState<string>("xrp");
   const [targetCurrency, setTargetCurrency] = useState<string>("sol");
   const [isListOpen, setIsListOpen] = useState<boolean>(false)
+  const [dropdownType, setDropdownType] = useState<DropdownType>("source");
 
   const contextValue: CurrencyContextType = {
     sourceCurrency,
@@ -15,7 +17,9 @@ const CurrencyContextProvider: React.FC<{ children: ReactNode }> = ({
     targetCurrency,
     setTargetCurrency,
     isListOpen, 
-    setIsListOpen
+    setIsListOpen,
+    dropdownType,
+    setDropdownType
   };
 
   return (
