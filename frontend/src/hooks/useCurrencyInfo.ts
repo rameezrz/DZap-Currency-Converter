@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CurrencyInfo from "../../types/UseCurrencyInfo";
+import CurrencyInfo from "../types/UseCurrencyInfo";
 
 
 const useCurrencyInfo = (currency: string) => {
@@ -10,8 +10,6 @@ const useCurrencyInfo = (currency: string) => {
       .then((res) => res.json())
       .then((res: { [key: string]: CurrencyInfo }) => setData(res[currency]));
   }, [currency]);
-
-  console.log(data);
 
   return data;
 };
