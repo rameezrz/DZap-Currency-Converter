@@ -1,14 +1,9 @@
 type InputBoxProps = {
-  label: string;
+  label: "From" | "To";
   amount: number;
   type: "source" | "target";
-  onAmountChange?: (amount: number) => void;
-  onCurrencyChange?: (currency: string) => void;
-  currencyOptions?: CryptoCurrency[];
-  selectedCurrency?: string;
   amountDisabled?: boolean;
-  currencyDisabled?: boolean;
-  className?: string;
+  onChangeAmount?: (newAmount: number) => void;
 };
 
 type BaseCurrency = {
