@@ -48,7 +48,7 @@ const CurrencyConverterForm = () => {
         targetCurrency: currencyContext.targetCurrency.symbol,
         amount,
       });
-
+      
       // Format and set the converted amount
       const roundedAmount =
         parseFloat(response.data.data.price) >= 1
