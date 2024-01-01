@@ -14,7 +14,6 @@ const DropDown = ({ type }: DropDownProps) => {
   const currencyContext = useCurrencyContext();
   const [searchValue, setSearchValue] = useState<string>("");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     // Fetch currencies when component mounts or currencyContext changes
@@ -27,7 +26,7 @@ const DropDown = ({ type }: DropDownProps) => {
           setLoading(false);
         }
       } catch (error) {
-        setError(error as Error);
+        throw new Error(error as string)
       }
     };
 
