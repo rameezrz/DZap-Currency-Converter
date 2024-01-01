@@ -1,13 +1,14 @@
+require('dotenv').config();
 import axios, { AxiosInstance } from "axios";
 
 const baseConfig = {
   headers: {
-    "X-CMC_PRO_API_KEY": "1a2a7c57-a358-40fa-be36-6bbd190f2927",
+    "X-CMC_PRO_API_KEY": process.env.CMC_API_KEY,
   },
 };
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: "https://pro-api.coinmarketcap.com",
+  baseURL: process.env.CMC_BASE_URL,
   ...baseConfig,
 });
 
