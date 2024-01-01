@@ -1,5 +1,5 @@
 import bgHero from "../assets/bg-hero.svg";
-import ConverterForm from "../components/ConverterFormNew";
+import ConverterForm from "../components/ConverterForm";
 import DropDown from "../components/DropDown";
 import useCurrencyContext from "../hooks/useCurrencyContext";
 import { DropdownType } from "../types/CurrencyContextType";

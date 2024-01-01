@@ -19,3 +19,8 @@ export type FiatCurrency = {
   name: string;
   sign: string;
 };
+
+export type CombinedCurrenciesResponse = {
+  cryptocurrencies: CryptoCurrency[];
+  fiatCurrencies: FiatCurrency[];
+};
