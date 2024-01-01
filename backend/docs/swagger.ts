@@ -11,8 +11,8 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:8000/', // Update with your server's URL
-        description: 'Local development server',
+        url: 'https://rzeee.dev/',
+        description: 'Production server',
       },
     ],
   },

@@ -5,19 +5,20 @@ import { BaseCurrency } from "../types/CurrencyType";
 import useCurrencyContext from "../hooks/useCurrencyContext";
 
 
-
 const InputBox: React.FC<InputBoxProps> = ({
   label,
   amount,
   onChangeAmount,
   amountDisabled = false,
 }) => {
+  // State for the selected currency and generating a unique ID
   const [selectedCurrency, setSelectedCurrency] = useState<BaseCurrency>();
   const id = useId();
 
+  // Accessing currency context using a custom hook
   const currencyContext = useCurrencyContext();
 
-
+  // useEffect to update the selected currency based on the label
   useEffect(() => {
     if (currencyContext) {
       if (label === "From") {
@@ -26,8 +27,9 @@ const InputBox: React.FC<InputBoxProps> = ({
         setSelectedCurrency(currencyContext.targetCurrency);
       }
     }
-  }, [currencyContext]);
+  }, [currencyContext, label]);
 
+  // Function to handle dropdown type and visibility
   const handleListType = () => {
     if (currencyContext) {
       if (label === "From") {
@@ -39,6 +41,7 @@ const InputBox: React.FC<InputBoxProps> = ({
     }
   };
 
+  // Function to handle button click and prevent propagation
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     handleListType();
@@ -48,9 +51,11 @@ const InputBox: React.FC<InputBoxProps> = ({
   return (
     <div className="bg-white p-3 rounded-lg text-sm flex">
       <div className="w-1/2">
+        {/* Label for the input */}
         <label htmlFor={id} className="text-black/40 mb-2 inline-block">
           {label}
         </label>
+        {/* Input field for amount */}
         <input
           id={id}
           type="text" // Change type to text to allow float input
@@ -73,6 +78,7 @@ const InputBox: React.FC<InputBoxProps> = ({
 
             const newAmount = matched ? matched[0] : null;
 
+            // Callback to parent component with the new amount
             onChangeAmount &&
               onChangeAmount(newAmount !== null ? parseFloat(newAmount) : 0);
           }}
@@ -80,11 +86,13 @@ const InputBox: React.FC<InputBoxProps> = ({
       </div>
       <div className="w-1/2 flex flex-wrap justify-end text-right relative">
         <p className="text-black/40 mb-2 w-full">Currency Type</p>
+        {/* Dropdown container for selecting currency */}
         <div className="custom-dropdown-container bg-gray-200 px-2 py-1 rounded-lg">
           <button
             className="custom-dropdown-toggle flex justify-center items-center gap-2 py-2 font-medium"
             onClick={(e) => handleClick(e)}
           >
+            {/* Displaying selected currency information */}
             <img
               src={`https://s2.coinmarketcap.com/static/img/coins/64x64/${selectedCurrency?.id}.png`}
               className="w-6"
@@ -98,5 +106,6 @@ const InputBox: React.FC<InputBoxProps> = ({
     </div>
   );
 };
+
 
 export default InputBox;

@@ -3,8 +3,7 @@ import { validationResult, check } from "express-validator";
 
 export const validateConvertCurrencyInput = [
   check("sourceCurrency")
-    .notEmpty().withMessage("Source currency is required")
-    .isString().isLength({ min: 3, max: 3 }).withMessage("Source currency must be three uppercase letters"),
+    .notEmpty().withMessage("Source currency is required"),
 
   check("amount")
     .notEmpty().withMessage("Amount is required")
@@ -17,8 +16,7 @@ export const validateConvertCurrencyInput = [
     }),
 
   check("targetCurrency")
-    .notEmpty().withMessage("Target currency is required")
-    .isString().isLength({ min: 3, max: 3 }).withMessage("Target currency must be three uppercase letters"),
+    .notEmpty().withMessage("Target currency is required"),
     
 
   // Middleware to handle validation errors
