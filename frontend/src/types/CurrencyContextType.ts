@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { BaseCurrency } from "./CurrencyType";
-import { CombinedCurrenciesResponse } from "./InputBoxProps";
+import { CombinedCurrenciesResponse } from "./CurrencyType";
 
 export type DropdownType = "source" | "target";
 
