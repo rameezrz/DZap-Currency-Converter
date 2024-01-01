@@ -62,14 +62,14 @@ export class CurrencyController {
         {
           params: {
             amount,
-            id: sourceCurrency,
+            symbol: sourceCurrency,
             convert: targetCurrency,
           },
         }
       );
 
       const convertedAmount =
-        exchangeRateResponse.data.data.quote[targetCurrency];
+        exchangeRateResponse.data.data[0].quote[targetCurrency];
 
       res.json(convertedAmount);
     } catch (error: any) {

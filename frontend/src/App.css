@@ -3,3 +3,26 @@
 body{
   font-family: 'Inter', sans-serif;
 }
+
+/* Style for WebKit browsers (Chrome, Safari) */
+ul::-webkit-scrollbar {
+  width: 10px;
+}
+
+ul::-webkit-scrollbar-thumb {
+  background-color: #a3a3a3;
+  border-radius: 10px;
+}
+
+ul::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Optional: Hide scrollbar track when not scrolling */
+ul::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+ul{
+  scroll-behavior: smooth;
+}
