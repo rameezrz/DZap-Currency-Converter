@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: 'https://rzeee.dev/',
+        url: 'https://rzeee.dev',
         description: 'Production server',
       },
     ],
