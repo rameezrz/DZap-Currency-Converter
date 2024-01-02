@@ -12,6 +12,9 @@ const CurrencyConverterForm = () => {
   const [convertedAmount, setConvertedAmount] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
 
+  console.log(amount, 'amount----------');
+  
+
   // Accessing currency context using a custom hook
   const currencyContext = useCurrencyContext();
 
