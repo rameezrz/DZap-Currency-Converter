@@ -1,13 +1,3 @@
-// import { Router } from 'express';
-// import { CurrencyController } from '../controllers/CurrencyController';
-// import { validateConvertCurrencyInput } from '../middlewares/InputValidation';
-
-// export const router = Router();
-
-// router.get('/currencies', CurrencyController.getCurrencies);
-// router.get('/convert-currency', validateConvertCurrencyInput, CurrencyController.convertCurrency)
-// router.get('/convert-currency-manually', validateConvertCurrencyInput, CurrencyController.convertCurrencyManually)
-
 import { Router } from 'express';
 import { getCurrencies, convertCurrency, convertCurrencyManually } from '../controllers/CurrencyController';
 import { validateConvertCurrencyInput } from '../middlewares/InputValidation';
