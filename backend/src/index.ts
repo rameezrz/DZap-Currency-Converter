@@ -15,7 +15,7 @@ app.use(express.json());
 // Serve Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
-// Your existing routes
+// All the Valid routes
 app.use("/api", router);
 
 // Error handling middleware

@@ -4,7 +4,6 @@ import { BiChevronDown } from "react-icons/bi";
 import { BaseCurrency } from "../types/CurrencyType";
 import useCurrencyContext from "../hooks/useCurrencyContext";
 
-
 const InputBox: React.FC<InputBoxProps> = ({
   label,
   amount,
@@ -47,7 +46,6 @@ const InputBox: React.FC<InputBoxProps> = ({
     handleListType();
   };
 
-
   return (
     <div className="bg-white p-3 rounded-lg text-sm flex">
       <div className="w-1/2">
@@ -58,29 +56,16 @@ const InputBox: React.FC<InputBoxProps> = ({
         {/* Input field for amount */}
         <input
           id={id}
-          type="text" // Change type to text to allow float input
+          type="number"
           className="text-2xl text-slate-700 outline-none w-full bg-transparent py-1.5"
           placeholder="0"
           disabled={amountDisabled}
-          value={amount === null ? "" : amount.toString()} // Use toString to format the number
+          value={amount === 0 ? "" : amount} // Use toString to format the number
           onChange={(e) => {
             const newValue = e.target.value;
 
-            // Allow only digits, one decimal point, and optional minus sign
-            const sanitizedValue = newValue.replace(/[^0-9.-]/g, "");
-
-            // Replace leading zeros if any
-            const formattedValue = sanitizedValue.replace(/^0+/, "0");
-
-            // Prevent multiple leading zeros and limit one decimal point
-            const regex = /^(-?\d*\.?\d{0,2})/;
-            const matched = formattedValue.match(regex);
-
-            const newAmount = matched ? matched[0] : null;
-
-            // Callback to parent component with the new amount
-            onChangeAmount &&
-              onChangeAmount(newAmount !== null ? parseFloat(newAmount) : 0);
+            // Callback to the parent component with the new amount
+            onChangeAmount && onChangeAmount(Number(newValue));
           }}
         />
       </div>
@@ -106,6 +91,5 @@ const InputBox: React.FC<InputBoxProps> = ({
     </div>
   );
 };
-
 
 export default InputBox;
