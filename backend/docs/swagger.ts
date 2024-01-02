@@ -5,9 +5,9 @@ const options = {
   swaggerDefinition: {
     openapi: '3.0.0',
     info: {
-      title: 'Your API Documentation',
+      title: 'DZap Currency Converter',
       version: '1.0.0',
-      description: 'Documentation for your backend API',
+      description: 'This project is a simple currency converter application that allows users to convert amounts between different cryptocurrencies and traditional currencies.',
     },
     servers: [
       {
