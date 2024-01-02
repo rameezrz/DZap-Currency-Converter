@@ -26,3 +26,8 @@ ul::-webkit-scrollbar-track {
 ul{
   scroll-behavior: smooth;
 }
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+}
