@@ -1,8 +1,12 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
 import { getCurrencies, convertCurrency, convertCurrencyManually } from '../controllers/CurrencyController';
 import { validateConvertCurrencyInput } from '../middlewares/InputValidation';
 
 export const router = Router();
+
+router.get('/',(req:Request,res:Response)=>{
+    res.status(200).json({success:true, message:"Welcome to Backend of DZap Currency Convertor. Please refer the detailed API Documentation at /api-docs to know about other API end points."})
+})
 
 /**
  * @swagger
